@@ -6,16 +6,15 @@ fn count_increases(collection: &[usize]) -> usize {
     collection.windows(2).filter(|w| w[1] > w[0]).count()
 }
 
-
 fn count_increases_part2(collection: &[usize]) -> usize {
-    collection.windows(3)
+    collection
+        .windows(3)
         .map(|w| w.iter().sum::<usize>())
         .collect::<Vec<usize>>()
         .windows(2)
         .filter(|w| w[1] > w[0])
         .count()
 }
-
 
 fn load_depths_from_file(filepath: &str) -> Vec<usize> {
     let file = File::open(filepath).unwrap();

@@ -8,16 +8,17 @@ mod day06;
 mod day08;
 mod day09;
 mod day10;
+mod day11;
 
 fn main() {
     println!("DAY 1");
     println!("part2: {}", day01::part1("data/input01.txt"));
     println!("part2: {}", day01::part2("data/input01.txt"));
-    
+
     println!("DAY 2");
     //println!("part1: {}", day02::part1("data/input02.txt"));
     println!("part2: {}", day02::part2("data/input02.txt"));
-    
+
     println!("DAY 3");
     //println!("part1: {}", day03::part1("data/input03.txt"));
     println!("part2: {}", day03::part2("data/input03.txt"));
@@ -37,7 +38,7 @@ fn main() {
     println!("DAY 7");
     //println!("part1: {}", day07::part1("data/input07.txt"));
     //println!("part2: {}", day07::part2("data/input07.txt"));
-    
+
     println!("DAY 8");
     //println!("part1: {}", day08::part1("data/input08.txt"));
     println!("part2: {}", day08::part2("data/input08.txt"));
@@ -49,4 +50,8 @@ fn main() {
     println!("DAY 10");
     println!("part1: {}", day10::part1());
     println!("part2: {}", day10::part2());
+
+    println!("DAY 11");
+    println!("part1: {}", day11::part1("data/input11.txt", 100));
+    println!("part2: {}", day11::part2("data/input11.txt", 999));
 }
