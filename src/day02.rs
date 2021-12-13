@@ -23,15 +23,61 @@ impl From<String> for NavCommand {
 }
 
 #[derive(Debug)]
-struct SubmarineState {
+struct SubmarineState1 {
+    pos: usize,
+    debth: usize,
+}
+
+impl SubmarineState1 {
+    fn new() -> Self {
+        SubmarineState1 { pos: 0, debth: 0 }
+    }
+
+    fn answer(&self) -> usize {
+        self.pos * self.debth
+    }
+
+    fn process_command(self, com: NavCommand) -> Self {
+        match com {
+            NavCommand::Up(x) => Self {
+                debth: self.debth - x,
+                ..self
+            },
+            NavCommand::Down(x) => Self {
+                debth: self.debth + x,
+                ..self
+            },
+            NavCommand::Forward(x) => Self {
+                pos: self.pos + x,
+                ..self
+            },
+        }
+    }
+}
+
+pub fn part1(path: &str) -> usize {
+    let file = File::open(path).unwrap();
+    let mut substate = SubmarineState1::new();
+    for line in io::BufReader::new(file).lines() {
+        let line = line.unwrap().to_string();
+        let command = NavCommand::from(line);
+        substate = substate.process_command(command);
+    }
+    substate.answer()
+}
+
+//////////////////////////////////
+
+#[derive(Debug)]
+struct SubmarineState2 {
     pos: usize,
     debth: usize,
     aim: usize,
 }
 
-impl SubmarineState {
+impl SubmarineState2 {
     fn new() -> Self {
-        SubmarineState {
+        SubmarineState2 {
             pos: 0,
             debth: 0,
             aim: 0,
@@ -63,7 +109,7 @@ impl SubmarineState {
 
 pub fn part2(path: &str) -> usize {
     let file = File::open(path).unwrap();
-    let mut substate = SubmarineState::new();
+    let mut substate = SubmarineState2::new();
     for line in io::BufReader::new(file).lines() {
         let line = line.unwrap().to_string();
         let command = NavCommand::from(line);

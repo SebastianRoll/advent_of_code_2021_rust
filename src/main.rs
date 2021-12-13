@@ -18,7 +18,7 @@ fn main() {
     println!("part2: {}", day01::part2("data/input01.txt"));
 
     println!("DAY 2");
-    //println!("part1: {}", day02::part1("data/input02.txt"));
+    println!("part1: {}", day02::part1("data/input02.txt"));
     println!("part2: {}", day02::part2("data/input02.txt"));
 
     println!("DAY 3");
