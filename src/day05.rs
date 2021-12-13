@@ -70,15 +70,14 @@ impl From<String> for LineSegment {
     }
 }
 
-pub fn part2(path: &str) -> usize {
+pub fn part(path: &str, is_part1: bool) -> usize {
     let file = File::open(path).unwrap();
     let lines = io::BufReader::new(file).lines();
 
     let segments: Vec<LineSegment> = lines
         .map(|numstr| LineSegment::from(numstr.unwrap()))
-        //.filter(|seg| seg.is_horizontal() || seg.is_vertical())
+        .filter(|seg| !is_part1 || seg.is_horizontal() || seg.is_vertical())
         .collect();
-    //println!("{:?}", segments);
 
     let mut freqs = HashMap::new();
 
@@ -86,10 +85,8 @@ pub fn part2(path: &str) -> usize {
         .iter()
         .flat_map(|seg| seg.line_points())
         .for_each(|p| *freqs.entry((p.0, p.1)).or_insert(0) += 1);
-    //println!("{:?}", freqs);
 
     let count = freqs.iter().filter(|(_k, &v)| v >= 2).count();
-    //println!("{:?}", count);
 
     count
 }
