@@ -38,8 +38,7 @@ fn filter_lines(lines: Vec<usize>, idx: usize, oxygen: bool, len: usize) -> Vec<
     filter_lines(flines, idx + 1, oxygen, len)
 }
 
-fn main() {
-    let path = "input.txt";
+pub fn part1(path: &str) -> usize {
     let file = File::open(path).unwrap();
     let mut counter = [0; 12];
     for line in io::BufReader::new(file).lines() {
@@ -62,10 +61,8 @@ fn main() {
     });
 
     let epsilon_rate = 0b111111111111 ^ gamma_rate;
-    println!("{:?}", counter);
-    println!("Gamma rate: {}", gamma_rate);
-    println!("Epsilon rate: {}", epsilon_rate);
-    println!("Answer: {}", gamma_rate * epsilon_rate);
+
+    gamma_rate * epsilon_rate
 }
 
 #[cfg(test)]
