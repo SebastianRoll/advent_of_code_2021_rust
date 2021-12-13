@@ -62,6 +62,6 @@ fn main() {
     println!("part2: {}", day12::part2("data/input12.txt"));
 
     println!("DAY 13");
-    println!("part1: {}", day13::part1("data/input13.txt"));
-    println!("part2: \r\n{}", day13::part2("data/input13.txt"));
+    println!("part1: {}", day13::part1("data/input13.txt").unwrap());
+    println!("part2: \r\n{}", day13::part2("data/input13.txt").unwrap());
 }
