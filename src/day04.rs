@@ -183,16 +183,18 @@ pub fn part2(path: &str) -> u32 {
     let mut game = BingoGame::read_file(path);
     game.play_game_find_loser().unwrap()
 }
-
+/*
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test_bingo_from_file() {
-        let bingo = BingoGame::read_file("input.txt");
+        let bingo = BingoGame::read_file("data/input04.txt");
 
         //assert_eq!(bingo.numbers, [10]);
         assert_eq!(bingo.boards.len(), 2);
     }
 }
+
+*/

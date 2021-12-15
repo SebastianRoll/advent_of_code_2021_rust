@@ -84,9 +84,4 @@ mod tests {
         let co2 = filter_lines(lines.clone(), 1, false, 5);
         assert_eq!(co2, [10])
     }
-
-    #[test]
-    fn test_part2() {
-        assert_eq!(part2(), 5852595)
-    }
 }
