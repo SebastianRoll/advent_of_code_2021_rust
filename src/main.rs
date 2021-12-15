@@ -12,6 +12,7 @@ mod day11;
 mod day12;
 mod day13;
 mod day14;
+mod day15;
 
 fn main() {
     println!("DAY 1");
@@ -67,6 +68,10 @@ fn main() {
     println!("part2: \r\n{}", day13::part2("data/input13.txt").unwrap());
 
     println!("DAY 14");
-    println!("part1: {}", day14::part1("data/input14.txt"));
-    println!("part2: {}", day14::part2("data/input14.txt"));
+    // println!("part1: {}", day14::part1("data/input14.txt"));
+    // println!("part2: {}", day14::part2("data/input14.txt"));
+
+    println!("DAY 15");
+    println!("part1: {}", day15::part1("data/input15_example.txt"));
+    // println!("part2: {}", day15::part2("data/input15_example.txt"));
 }
