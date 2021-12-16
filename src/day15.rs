@@ -114,18 +114,12 @@ pub fn part(path: &str, multiplier: usize) -> usize {
 
     let endpoint = (cavern.width(multiplier) - 1, cavern.height(multiplier) - 1);
 
-    let mut counter = 0;
     while let Some(Reverse(Node { point: current, .. })) = minheap.pop() {
         if visited.contains(&current) {
             continue;
         } else {
             visited.insert(current);
         }
-
-        if counter % 1000 == 0 {
-            eprintln!("current = {:?}: {} - {}", current, dists[&current], counter);
-        }
-        counter += 1;
 
         let mut neighbors = Vec::new();
         if current.0 >= 1 {

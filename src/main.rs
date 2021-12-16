@@ -1,3 +1,4 @@
+/*
 mod day01;
 mod day02;
 mod day03;
@@ -11,10 +12,13 @@ mod day10;
 mod day11;
 mod day12;
 mod day13;
-mod day14;
+// mod day14;
 mod day15;
+*/
+mod day16;
 
 fn main() {
+    /*
     println!("DAY 1");
     println!("part2: {}", day01::part1("data/input01.txt"));
     println!("part2: {}", day01::part2("data/input01.txt"));
@@ -74,4 +78,11 @@ fn main() {
     println!("DAY 15");
     println!("part1: {}", day15::part("data/input15.txt", 1));
     println!("part2: {}", day15::part("data/input15.txt", 5));
+    */
+
+    println!("DAY 16");
+    let literal = "data/input16_example.txt";
+    let op_count = "data/input16_example_operator_count.txt";
+    let op_length = "data/input16_example_operator_length.txt";
+    println!("part1: {}", day16::part1("data/input16.txt"));
 }
