@@ -102,7 +102,7 @@ mod tests {
     fn test_shot_hits() {
         // target area: x=20..30, y=-10..-5
         let rect = Rectangle::new(Vector::new(20, -5), Vector::new(30, -10));
-        let mut pos = Vector::new(0, 0);
+        let pos = Vector::new(0, 0);
 
         let vel = Vector::new(7, 2);
         let hit = is_hit(vel, pos, &rect);
@@ -119,7 +119,7 @@ mod tests {
     fn test_shot_misses() {
         // target area: x=20..30, y=-10..-5
         let rect = Rectangle::new(Vector::new(20, -5), Vector::new(30, -10));
-        let mut pos = Vector::new(0, 0);
+        let pos = Vector::new(0, 0);
 
         let vel = Vector::new(17, -4);
         let hit = is_hit(vel, pos, &rect);
@@ -153,7 +153,7 @@ mod tests {
             assert_eq!(hit, false, "hit found at vel: {:?}", vel);
         }
         */
-        let vel = Vector::new(22, 90);
+        let vel = Vector::new(x, 90);
         let hit = is_hit(vel, pos, &rect);
         assert_eq!(hit, true, "hit not found at vel: {:?}", vel);
     }
