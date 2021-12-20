@@ -1,7 +1,7 @@
-use std::fs;
+use bitstream_io::{BigEndian, BitRead, BitReader};
 use hex;
+use std::fs;
 use std::io::Cursor;
-use bitstream_io::{BigEndian, BitReader, BitRead};
 
 #[derive(Debug)]
 enum PacketType {
@@ -12,7 +12,7 @@ enum PacketType {
     Max,
     Gt,
     Lt,
-    Equal
+    Equal,
 }
 impl From<u8> for PacketType {
     fn from(val: u8) -> Self {
@@ -25,35 +25,21 @@ impl From<u8> for PacketType {
             5 => Self::Gt,
             6 => Self::Lt,
             7 => Self::Equal,
-            _ => panic!("Invalid type value")
+            _ => panic!("Invalid type value"),
         }
     }
 }
 impl PacketType {
     fn op(&self, nums: Vec<usize>) -> usize {
         match self {
-        Self::Sum => {
-            nums.iter().sum()
-        },
-        Self::Product => {
-            nums.iter().product()
-        },
-        Self::Min => {
-            *nums.iter().min().unwrap()
-        },
-        Self::Max => {
-            *nums.iter().max().unwrap()
-        },
-        Self::Gt => {
-            (nums[0] > nums[1]) as usize
-        },
-        Self::Lt => {
-            (nums[0] < nums[1]) as usize
-        },
-        Self::Equal => {
-            (nums[0] == nums[1]) as usize
-        },
-        _ => panic!("Invalid type value")
+            Self::Sum => nums.iter().sum(),
+            Self::Product => nums.iter().product(),
+            Self::Min => *nums.iter().min().unwrap(),
+            Self::Max => *nums.iter().max().unwrap(),
+            Self::Gt => (nums[0] > nums[1]) as usize,
+            Self::Lt => (nums[0] < nums[1]) as usize,
+            Self::Equal => (nums[0] == nums[1]) as usize,
+            _ => panic!("Invalid type value"),
         }
     }
 }
@@ -101,20 +87,20 @@ fn parse<T: BitRead>(reader: &mut T) -> (usize, usize) {
             loop {
                 read_len += 5;
                 let stop = !reader.read_bit().unwrap();
-                    let val = reader.read::<u8>(4).unwrap();
-                    literal_val = (literal_val << 4) + usize::from(val);
-                    if stop {
-                        break;
-                    }
+                let val = reader.read::<u8>(4).unwrap();
+                literal_val = (literal_val << 4) + usize::from(val);
+                if stop {
+                    break;
+                }
             }
             score = literal_val;
-            // eprintln!("LITERAL = {:?}", score);  
-        },
+            // eprintln!("LITERAL = {:?}", score);
+        }
         op => {
             let (nums, rl) = operator(reader);
             read_len += rl;
             score = op.op(nums);
-        },
+        }
     };
     (score, read_len)
 }
@@ -130,13 +116,13 @@ fn operator<T: BitRead>(reader: &mut T) -> (Vec<usize>, usize) {
             // println!("OPERATOR LENGTH");
             read_len += 15;
             let mut length = reader.read::<u32>(15).unwrap();
-          while length > 0 {
-            let (sc, rl) = parse(reader);
-            nums.push(sc);
-            length -= rl as u32;
-            read_len += rl;
+            while length > 0 {
+                let (sc, rl) = parse(reader);
+                nums.push(sc);
+                length -= rl as u32;
+                read_len += rl;
+            }
         }
-        },
         0b1 => {
             // println!("OPERATOR COUNT");
             read_len += 11;
@@ -148,9 +134,8 @@ fn operator<T: BitRead>(reader: &mut T) -> (Vec<usize>, usize) {
                 read_len += rl;
             }
             //reader.read_unary1().unwrap();
-
-        },
-        _ => unreachable!("ya")
+        }
+        _ => unreachable!("ya"),
     }
     (nums, read_len)
 }
