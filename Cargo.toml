@@ -10,3 +10,5 @@ anyhow = "1.0.51"
 # day16
 hex = "0.4.3"
 bitstream-io = "1.2.0"
+# day18
+itertools = "0.8.2"
